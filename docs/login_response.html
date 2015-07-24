@@ -1,0 +1,386 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Simunomics - Massive Multiplayer Business Simulation Game</title>
+	<style type="text/css">
+		<!--
+		a:link, a:visited { color:#FFF; font-weight:bold; text-decoration:underline; }
+		a:hover, a:active { color:#FF0; }
+
+		body {
+			background-image:url(Images/Seattle1920.jpg);
+			background-position:top;
+			background-color:#000;
+			background-attachment:fixed;
+			color:#FEFBF5;
+		}
+		#WelcomeContent { width:960px; margin:auto; }
+		#OpenUpper { position:relative; width:960px; min-height:160px; margin:10px auto; }
+		#Title { position:absolute; left:0; top:0; width:426px; padding-top:137px; padding-left:150px;
+			background-image:url(Images/SimunomicsLogo.GIF); background-repeat:no-repeat; background-position:top; }
+		#Title .Text { padding:2px; color:#F00; font-size:20px; font-weight:bold; text-shadow:0px 0px 2px #000; }
+		#InfoBtn { position:absolute; top:0; left:620px; }
+		#NewPlayerBtn { position:absolute; display:block; top:0; right:10px; width:180px;
+			border-radius:10px; -webkit-border-radius:10px; -moz-border-radius:10px; border:solid #FEFBF5 3px;
+			background-color:#F00; background-image:url(Images/Backgrounds/TranslucentBack-Boxy.png); background-position:center; text-decoration:none; }
+		#NewPlayerBtn:hover { background-color:#2f6627; cursor:pointer; }
+		#NewPlayerBtn p { margin:2px; padding:0; text-align:center; }
+		#NewPlayerBtn .Line1 { color:#FFF; font-family:Arial, Helvetica, sans-serif; font-size:18px; }
+		#NewPlayerBtn .Line2 { color:#FFF; font-family:Arial, Helvetica, sans-serif; font-size:22px; font-weight:bold; }
+		#SignInBox { position:absolute; top:74px; right:0; width:360px; }
+		#SignInLabel { height:20px; font-weight:bold; font-size:16px; }
+		#SignInRules { font-style:italic; }
+		#SignInBox input[type=text], #SignInBox input[type=password] { width:120px; margin:0 3px 2px 0; }
+		#SignInBox input[type=submit] {
+			display:inline-block; padding:2px 12px;
+			background-color:#f00;
+			background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f00), color-stop(1, #b80606));
+			background:-moz-linear-gradient(top, #f00 5%, #b80606 100%);
+			background:-webkit-linear-gradient(top, #f00 5%, #b80606 100%);
+			background:-o-linear-gradient(top, #f00 5%, #b80606 100%);
+			background:-ms-linear-gradient(top, #f00 5%, #b80606 100%);
+			background:linear-gradient(to bottom, #f00 5%, #b80606 100%);
+			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f00', endColorstr='#b80606',GradientType=0);
+			-moz-box-shadow: 0px 1px 0px 1px #000000; -webkit-box-shadow: 0px 1px 0px 1px #000000; box-shadow: 0px 1px 0px 1px #000000;
+			-moz-border-radius:6px; -webkit-border-radius:6px; border-radius:6px; border:1px solid #bf0707;
+			color:#fff; font-size:18px; font-family:arial; font-weight:bold; text-decoration:none; text-shadow:0px 1px 0px #000; cursor:pointer;
+		}
+		#SignInBox input[type=submit]:hover {
+			background-color:#2f6627;
+			background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #2f6627), color-stop(1, #025827));
+			background:-moz-linear-gradient(top, #2f6627 5%, #025827 100%);
+			background:-webkit-linear-gradient(top, #2f6627 5%, #025827 100%);
+			background:-o-linear-gradient(top, #2f6627 5%, #025827 100%);
+			background:-ms-linear-gradient(top, #2f6627 5%, #025827 100%);
+			background:linear-gradient(to bottom, #2f6627 5%, #025827 100%);
+			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#2f6627', endColorstr='#025827',GradientType=0);
+			border:1px solid #013517;
+		}
+		#SignInBox input[type=submit]:active { position:relative; top:1px; }
+		#ClosedMessage { position:absolute; width:360px; top:74px; right:0; padding:2px; border:3px white solid; color:#FFF; font-size:12px;
+			background-color:#f00;
+			background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f00), color-stop(1, #b80606));
+			background:-moz-linear-gradient(top, #f00 5%, #b80606 100%);
+			background:-webkit-linear-gradient(top, #f00 5%, #b80606 100%);
+			background:-o-linear-gradient(top, #f00 5%, #b80606 100%);
+			background:-ms-linear-gradient(top, #f00 5%, #b80606 100%);
+			background:linear-gradient(to bottom, #f00 5%, #b80606 100%);
+			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f00', endColorstr='#b80606',GradientType=0);
+			border-radius:4px; -webkit-border-radius:4px; -moz-border-radius:4px; }
+		#ClosedMessage .Label { font-size:20px; font-weight:bold; text-align:center; }
+		#ErrorMessage { padding-top:165px; font-size:18px; text-align:right; color:#FF0; font-weight:bold; text-shadow:0px 0px 2px #000; } /* Padding used to push down height of box */
+		#BadPassCase { padding-top:165px; }
+		#BadPassInner { margin:auto; width:600px; padding:2px; background-color:#FBFFCE; font-size:16px; color:#000; border:3px solid black; border-radius:5px; -webkit-border-radius:5px; -moz-border-radius:5px; text-align:center;}
+		#BadPassInner a:link { color:#698AC0; text-decoration:none; }
+		#BadPassInner a:visited { color:#698AC0; text-decoration:none; }
+		#BadPassInner a:hover { color:#698AC0; text-decoration:underline; }
+		#BadPassInner a:active { color:#698AC0; text-decoration:underline; }
+		#DoubleMiddle { width:960px; margin:5px auto; padding:0; background:rgba(255,255,255,0.2); border-radius:5px; -webkit-border-radius:5px; -moz-border-radius:5px; }
+		#DoubleMiddle .Item { display:inline-block; margin:10px; width:460px; height:285px; background:#FEFBF5; border-radius:5px; -webkit-border-radius:5px; -moz-border-radius:5px; color:#000; }
+		#DoubleMiddle .Label { text-align:center; font-weight:bold; font-size:20px; height:26px; padding-top:2px; }
+		#Ticker { width:940px; margin:10px auto; padding:10px; background:rgba(255,255,255,0.2); border-radius:4px; -webkit-border-radius:4px; -moz-border-radius:4px; }
+		#TickInner { height:26px; font-size:18px;
+			background:#CCC; font-family:Tahoma, Geneva, sans-serif;
+			background-color:#DDD;
+			background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #DDD), color-stop(1, #AAA));
+			background:-moz-linear-gradient(top, #DDD 5%, #AAA 100%);
+			background:-webkit-linear-gradient(top, #DDD 5%, #AAA 100%);
+			background:-o-linear-gradient(top, #DDD 5%, #AAA 100%);
+			background:-ms-linear-gradient(top, #DDD 5%, #AAA 100%);
+			background:linear-gradient(to bottom, #DDD 5%, #AAA 100%);
+			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#DDD', endColorstr='#AAA',GradientType=0);
+			border-radius:4px; -webkit-border-radius:4px; -moz-border-radius:4px; }
+		#TickInner .Label { width:140px; height:24px; padding-left:10px; font-weight:bold; color:#2f6627; vertical-align:middle; }
+		#TickInner marquee { width:790px; height:24px; color:#111; vertical-align:middle; }
+		#TripleBottom { width:960px; margin:5px auto; padding:0; background:rgba(255,255,255,0.2); border-radius:3px; -webkit-border-radius:3px; -moz-border-radius:3px; }
+		#TripleBottom .Item { display:inline-block; width:300px; margin:5px 10px; height:187px; background:#FEFBF5; color:#000; border-radius:3px; -webkit-border-radius:3px; -moz-border-radius:3px; }
+		#TripleBottom .Label { text-align:center; font-weight:bold; font-size:18px; height:24px; }
+		#TextBottom { width:960px; margin:10px auto; padding:10px; background:rgba(0,0,0,0.2); border-radius:5px; -webkit-border-radius:5px; -moz-border-radius:5px; }
+
+
+		/* Copied from StyleSheet */
+		.BottomLink {
+			padding-top:64px;
+			width:64px;
+			background-position:center top;
+			background-repeat:no-repeat;
+		}
+		.BottomLink:hover { text-decoration:underline; }
+		.HelpLink { background-image:url(Images/Icon-Help-Large.png); }
+		.HelpLink:hover { background-image:url(Images/Icon-Help-Large-Purple.png); cursor:pointer; }
+
+		.BottomTerms { padding:4px; margin-top:20px; width:100%; background:rgba(0,0,0,0.8); border-radius:10px; -webkit-border-radius:4px; -moz-border-radius:4px; }
+		.third { float:left; width:33%; text-align:center; }
+		-->
+	</style>
+</head>
+<body>
+
+<div id="WelcomeContent">
+
+	<div id="OpenUpper">
+		<div id="Title"><div class="Text">The Ultimate Business Simulation Game</div></div>
+		<div id="InfoBtn" class="HelpLink BottomLink" onclick="void(window.open('help/HelpLanding.php', 'Help', 'width=800,height=600,resizable=yes,scrollbars=yes'))"></div>
+		<a id="NewPlayerBtn" href="NewPlayer0.php">
+			<p class="Line1">Sign Up Now</p>
+			<p class="Line2">Play For Free</p>
+		</a>
+		<div id="SignInBox">
+			<form id="LoginForm" name="LoginForm" method="POST" action="Login.php">
+				<div id="SignInLabel">Returning Players Sign In Here:</div>
+				<div id="SignInRules">By logging in I indicate that I have read and agreed to the <a href="javascript:void(window.open('SharedDisplay/IncludeRules.php', 'Game Rules', 'width=800,height=400,resizable=yes,scrollbars=yes'))">Rules</a> and <a href="javascript:void(window.open('SharedDisplay/IncludeToS.php', 'Terms of Use', 'width=800,height=400,resizable=yes,scrollbars=yes'))">Terms of Use</a> of Simunomics.</div>
+				<input type="text" name="UserName" id="UserName" autocomplete="on" placeholder="User Name" required="required" />
+				<input type="password" name="Password" id="Password" autocomplete="on" placeholder="Password" required="required" />
+				<input type="submit" id="SubmitBtn" value="Sign In" />
+			</form>
+		</div>
+		<div id="BadPassCase"><div id="BadPassInner">
+			That username or password is incorrect.  Please try again.<br />
+			Don't remember?  <a href="Login-PasswordReset.php">Request a reset.</a>
+		</div></div>
+	</div>
+
+	<div id="DoubleMiddle">
+		<div class="Item">
+			<div class="Label">City Population</div>
+			<div id="PopHistory" style="width:460px; height:252px; background:transparent"></div>
+			<script language="JavaScript" type="text/javascript">
+				var data_PopHistory;
+				var chart_PopHistory;
+				var options_PopHistory = {
+					chartArea: {top:10, left:60, width:390, height:202},
+					backgroundColor: 'transparent',
+					titlePosition: 'in', axisTitlesPosition: 'out',
+					series: {},
+					hAxis: {textPosition: 'out'},
+					vAxis: {
+
+						textPosition: 'out'
+					},
+					legend: {position: 'bottom'},
+					animation: {duration:3000}
+				};
+
+				google.load("visualization", "1", {packages:["corechart"], 'language': 'en'});       google.setOnLoadCallback(initChart_PopHistory);
+				// $(document).ready(initChart);
+
+				function initChart_PopHistory() {
+					chart_PopHistory = new google.visualization.LineChart(document.getElementById('PopHistory'));
+					drawChart_PopHistory();
+				}
+
+				function drawChart_PopHistory() {
+					delete data_PopHistory;
+					data_PopHistory = new google.visualization.DataTable();
+					data_PopHistory.addColumn('datetime', 'Time');
+					data_PopHistory.addColumn('number', 'Abalesk');
+					data_PopHistory.addColumn('number', 'Bellerive');
+					data_PopHistory.addColumn('number', 'Canjara');
+					data_PopHistory.addColumn('number', 'Drakar');
+					data_PopHistory.addRows([
+						[new Date(1435188000000),1113921,979846,3993980,972791],[new Date(1435275000000),1110035,983584,4030147,966653],[new Date(1435361000000),1105955,986849,4065103,961329],[new Date(1435448000000),1102340,990402,4100931,956119],[new Date(1435534000000),1100594,993704,4138244,952339],[new Date(1435620000000),1099685,996029,4174288,949093],[new Date(1435707000000),1097792,998069,4208945,946536],[new Date(1435793000000),1094208,999939,4239906,944578],[new Date(1435880000000),1089432,1001797,4267253,943023],[new Date(1435966000000),1083935,1003852,4293829,941663],[new Date(1436052000000),1077059,1006056,4321499,940687],[new Date(1436139000000),1067900,1008360,4348882,939504],[new Date(1436225000000),1058715,1011194,4374031,937245],[new Date(1436312000000),1050186,1014362,4400058,934837],[new Date(1436398000000),1041961,1018259,4427771,932368],[new Date(1436484000000),1033576,1022268,4457695,929271],[new Date(1436571000000),1025695,1026306,4486684,925002],[new Date(1436657000000),1018172,1030382,4510057,920760],[new Date(1436744000000),1011499,1034976,4531110,915770],[new Date(1436830000000),1005005,1040197,4547575,910083],[new Date(1436916000000),999355,1046325,4560655,904106],[new Date(1437003000000),995492,1055637,4572081,900624],[new Date(1437089000000),992814,1065978,4582302,898888],[new Date(1437176000000),990968,1076736,4593258,898534],[new Date(1437262000000),989385,1087298,4604521,898853],[new Date(1437348000000),986836,1096822,4617625,900362],[new Date(1437435000000),983847,1106293,4627548,903017],[new Date(1437521000000),980276,1114845,4636262,906051],[new Date(1437608000000),975005,1119452,4639841,906880],[new Date(1437694000000),969321,1121629,4644785,906975]        ]);
+					chart_PopHistory.draw(data_PopHistory, options_PopHistory);
+				}
+			</script>
+		</div><div class="Item">
+		<div class="Label">City Salary</div>
+		<div id="SalaryHistory" style="width:460px; height:252px; background:transparent"></div>
+		<script language="JavaScript" type="text/javascript">
+			var data_SalaryHistory;
+			var chart_SalaryHistory;
+			var options_SalaryHistory = {
+				chartArea: {top:10, left:50, width:400, height:202},
+				backgroundColor: 'transparent',
+				titlePosition: 'in', axisTitlesPosition: 'out',
+				series: {},
+				hAxis: {textPosition: 'out'},
+				vAxis: {
+
+					textPosition: 'out'
+				},
+				legend: {position: 'bottom'},
+				animation: {duration:3000}
+			};
+
+			google.load("visualization", "1", {packages:["corechart"], 'language': 'en'});       google.setOnLoadCallback(initChart_SalaryHistory);
+			// $(document).ready(initChart);
+
+			function initChart_SalaryHistory() {
+				chart_SalaryHistory = new google.visualization.LineChart(document.getElementById('SalaryHistory'));
+				drawChart_SalaryHistory();
+			}
+
+			function drawChart_SalaryHistory() {
+				delete data_SalaryHistory;
+				data_SalaryHistory = new google.visualization.DataTable();
+				data_SalaryHistory.addColumn('datetime', 'Time');
+				data_SalaryHistory.addColumn('number', 'Abalesk');
+				data_SalaryHistory.addColumn('number', 'Bellerive');
+				data_SalaryHistory.addColumn('number', 'Canjara');
+				data_SalaryHistory.addColumn('number', 'Drakar');
+				data_SalaryHistory.addRows([
+					[new Date(1435188000000),46615.05,65977.90,44795.99,61087.23],[new Date(1435275000000),45727.65,65894.26,44449.72,61143.51],[new Date(1435361000000),43929.66,65792.92,44299.99,61263.97],[new Date(1435448000000),42711.47,68014.01,45036.98,61189.89],[new Date(1435534000000),42860.76,68264.98,45071.51,61399.00],[new Date(1435620000000),45589.83,68181.27,44585.53,61207.45],[new Date(1435707000000),45333.53,67873.52,44201.82,60790.00],[new Date(1435793000000),43945.30,68174.19,43822.85,61024.19],[new Date(1435880000000),43574.57,68352.13,43832.85,61060.13],[new Date(1435966000000),43529.99,68481.78,43749.39,60820.51],[new Date(1436052000000),43328.04,68730.85,43868.39,60996.67],[new Date(1436139000000),41810.39,68500.30,44329.52,60989.34],[new Date(1436225000000),42464.09,69563.21,44049.41,59379.04],[new Date(1436312000000),43734.67,69904.80,44128.80,59297.33],[new Date(1436398000000),43467.54,69986.41,43829.07,59266.66],[new Date(1436484000000),43002.05,70117.19,44119.91,58988.34],[new Date(1436571000000),43199.08,69922.39,44534.03,56290.98],[new Date(1436657000000),42699.95,68684.15,44120.91,56496.40],[new Date(1436744000000),42581.58,68812.57,45762.77,56489.00],[new Date(1436830000000),43290.37,68780.78,45600.46,56584.17],[new Date(1436916000000),43946.12,68935.64,45282.51,56485.88],[new Date(1437003000000),44108.47,69201.23,44337.64,56417.51],[new Date(1437089000000),44418.85,69272.48,44304.38,56629.45],[new Date(1437176000000),44901.18,69347.57,44241.19,56615.92],[new Date(1437262000000),46506.90,69464.00,43339.88,56284.23],[new Date(1437348000000),46183.55,69464.35,43384.28,57160.85],[new Date(1437435000000),45305.36,69532.95,41220.29,56617.77],[new Date(1437521000000),45317.78,70576.73,41308.21,56717.37],[new Date(1437608000000),45368.16,70842.76,41345.18,56681.61],[new Date(1437694000000),47343.75,70737.45,43768.74,56837.53]        ]);
+				chart_SalaryHistory.draw(data_SalaryHistory, options_SalaryHistory);
+			}
+		</script>
+	</div>
+	</div>
+
+	<div id="Ticker">
+		<div id="TickInner">
+			<span class="Label">Recent News:</span>
+			<marquee onmouseover="this.stop()" onmouseout="this.start()">Jul 10: July Event - Submission Victory: Slippers . . . Jun 10: June Event - Ring it up: Paper . . . May 10: May Event - Household Name: Paper . . . May 9: Preview the Upcoming New Layout . . . Mar 23: Where are the profits - a tentative answer . . . Mar 9: UPDATE: Wholesale Rules will be Phased in . . . Mar 9: New Sales Rules in Effect . . . Mar 5: Sponsor An Event . . . Jan 1: Updates to Company Logos . . . </marquee>
+		</div>
+	</div>
+
+	<div id="TripleBottom"><div class="Item">
+		<div class="Label">Retail Economy</div>
+		<div id="RetailHistory" style="width:300px; height:160px; background:transparent"></div>
+		<script language="JavaScript" type="text/javascript">
+			var data_RetailHistory;
+			var chart_RetailHistory;
+			var options_RetailHistory = {
+				chartArea: {top:10, left:40, width:250, height:110},
+				backgroundColor: 'transparent',
+				titlePosition: 'in', axisTitlesPosition: 'out',
+				series: {},
+				hAxis: {textPosition: 'out'},
+				vAxis: {
+					format:'##.###%',
+					textPosition: 'out'
+				},
+				legend: {position: 'bottom'},
+				animation: {duration:3000}
+			};
+
+			google.load("visualization", "1", {packages:["corechart"], 'language': 'en'});       google.setOnLoadCallback(initChart_RetailHistory);
+			// $(document).ready(initChart);
+
+			function initChart_RetailHistory() {
+				chart_RetailHistory = new google.visualization.LineChart(document.getElementById('RetailHistory'));
+				drawChart_RetailHistory();
+			}
+
+			function drawChart_RetailHistory() {
+				delete data_RetailHistory;
+				data_RetailHistory = new google.visualization.DataTable();
+				data_RetailHistory.addColumn('datetime', 'Time');
+				data_RetailHistory.addColumn('number', 'Abalesk');
+				data_RetailHistory.addColumn('number', 'Bellerive');
+				data_RetailHistory.addColumn('number', 'Canjara');
+				data_RetailHistory.addColumn('number', 'Drakar');
+				data_RetailHistory.addRows([
+					[new Date(1435188000000),0.827446,0.926967,1.1025,0.889461],[new Date(1435275000000),0.821004,0.929839,1.1024,0.892051],[new Date(1435361000000),0.816919,0.929173,1.10372,0.892016],[new Date(1435448000000),0.820992,0.929932,1.10262,0.891105],[new Date(1435534000000),0.823851,0.931498,1.10158,0.890578],[new Date(1435620000000),0.820286,0.929966,1.10515,0.88997],[new Date(1435707000000),0.816311,0.928817,1.10838,0.888835],[new Date(1435793000000),0.817331,0.924937,1.11132,0.887261],[new Date(1435880000000),0.818443,0.925152,1.11124,0.883923],[new Date(1435966000000),0.817621,0.921422,1.11383,0.882533],[new Date(1436052000000),0.816789,0.918481,1.11643,0.880096],[new Date(1436139000000),0.821816,0.917548,1.11497,0.878329],[new Date(1436225000000),0.82187,0.914874,1.11665,0.874911],[new Date(1436312000000),0.822658,0.916862,1.11562,0.877078],[new Date(1436398000000),0.825171,0.916702,1.11451,0.875045],[new Date(1436484000000),0.829708,0.918049,1.11321,0.874315],[new Date(1436571000000),0.829954,0.921412,1.10983,0.87448],[new Date(1436657000000),0.834937,0.921883,1.10804,0.871238],[new Date(1436744000000),0.841436,0.928279,1.10262,0.875013],[new Date(1436830000000),0.840195,0.932195,1.09848,0.87862],[new Date(1436916000000),0.838716,0.938137,1.0968,0.879991],[new Date(1437003000000),0.836816,0.943044,1.09445,0.879968],[new Date(1437089000000),0.834629,0.945619,1.09454,0.877131],[new Date(1437176000000),0.834451,0.94788,1.09293,0.876906],[new Date(1437262000000),0.82784,0.949587,1.09515,0.876479],[new Date(1437348000000),0.823827,0.949604,1.09645,0.87674],[new Date(1437435000000),0.819802,0.953558,1.09743,0.875973],[new Date(1437521000000),0.816106,0.958185,1.09992,0.875098],[new Date(1437608000000),0.811405,0.960557,1.10328,0.875553],[new Date(1437694000000),0.807165,0.968457,1.10039,0.878325]        ]);
+				chart_RetailHistory.draw(data_RetailHistory, options_RetailHistory);
+			}
+		</script>
+	</div><div class="Item">
+		<div class="Label">Labor Economy</div>
+		<div id="LaborHistory" style="width:300px; height:160px; background:transparent"></div>
+		<script language="JavaScript" type="text/javascript">
+			var data_LaborHistory;
+			var chart_LaborHistory;
+			var options_LaborHistory = {
+				chartArea: {top:10, left:40, width:250, height:110},
+				backgroundColor: 'transparent',
+				titlePosition: 'in', axisTitlesPosition: 'out',
+				series: {},
+				hAxis: {textPosition: 'out'},
+				vAxis: {
+					format:'##.###%',
+					textPosition: 'out'
+				},
+				legend: {position: 'bottom'},
+				animation: {duration:3000}
+			};
+
+			google.load("visualization", "1", {packages:["corechart"], 'language': 'en'});       google.setOnLoadCallback(initChart_LaborHistory);
+			// $(document).ready(initChart);
+
+			function initChart_LaborHistory() {
+				chart_LaborHistory = new google.visualization.LineChart(document.getElementById('LaborHistory'));
+				drawChart_LaborHistory();
+			}
+
+			function drawChart_LaborHistory() {
+				delete data_LaborHistory;
+				data_LaborHistory = new google.visualization.DataTable();
+				data_LaborHistory.addColumn('datetime', 'Time');
+				data_LaborHistory.addColumn('number', 'Abalesk');
+				data_LaborHistory.addColumn('number', 'Bellerive');
+				data_LaborHistory.addColumn('number', 'Canjara');
+				data_LaborHistory.addColumn('number', 'Drakar');
+				data_LaborHistory.addRows([
+					[new Date(1435188000000),1.09645,1.12509,0.975326,1.07106],[new Date(1435275000000),1.09342,1.1223,0.976051,1.06901],[new Date(1435361000000),1.09057,1.11945,0.976789,1.06649],[new Date(1435448000000),1.0886,1.1169,0.977484,1.06311],[new Date(1435534000000),1.08742,1.11299,0.978265,1.05951],[new Date(1435620000000),1.08691,1.1118,0.978623,1.05807],[new Date(1435707000000),1.08871,1.11231,0.978672,1.05641],[new Date(1435793000000),1.09123,1.11268,0.978642,1.05548],[new Date(1435880000000),1.09261,1.11224,0.978833,1.05373],[new Date(1435966000000),1.09157,1.11128,0.979207,1.05232],[new Date(1436052000000),1.09101,1.10935,0.97968,1.05013],[new Date(1436139000000),1.09156,1.10817,0.980017,1.04808],[new Date(1436225000000),1.09238,1.11045,0.979946,1.04777],[new Date(1436312000000),1.09433,1.11457,0.979685,1.04709],[new Date(1436398000000),1.09567,1.11663,0.979658,1.04617],[new Date(1436484000000),1.09641,1.11793,0.979773,1.04423],[new Date(1436571000000),1.09755,1.11997,0.979738,1.04333],[new Date(1436657000000),1.09888,1.11955,0.979889,1.04222],[new Date(1436744000000),1.10141,1.11844,0.980054,1.04032],[new Date(1436830000000),1.10283,1.1163,0.980463,1.03675],[new Date(1436916000000),1.10341,1.11327,0.980989,1.03339],[new Date(1437003000000),1.10378,1.11017,0.981523,1.03029],[new Date(1437089000000),1.10156,1.10643,0.982319,1.02565],[new Date(1437176000000),1.10086,1.10436,0.982765,1.02324],[new Date(1437262000000),1.09941,1.1016,0.98328,1.02142],[new Date(1437348000000),1.09816,1.09831,0.983896,1.01797],[new Date(1437435000000),1.09694,1.09566,0.984385,1.01575],[new Date(1437521000000),1.09617,1.09207,0.98489,1.0146],[new Date(1437608000000),1.0954,1.08868,0.985369,1.01354],[new Date(1437694000000),1.09317,1.08423,0.986022,1.01241]        ]);
+				chart_LaborHistory.draw(data_LaborHistory, options_LaborHistory);
+			}
+		</script>
+	</div><div class="Item">
+		<div class="Label">Construction Economy</div>
+		<div id="ConstructHistory" style="width:300px; height:160px; background:transparent"></div>
+		<script language="JavaScript" type="text/javascript">
+			var data_ConstructHistory;
+			var chart_ConstructHistory;
+			var options_ConstructHistory = {
+				chartArea: {top:10, left:40, width:250, height:110},
+				backgroundColor: 'transparent',
+				titlePosition: 'in', axisTitlesPosition: 'out',
+				series: {},
+				hAxis: {textPosition: 'out'},
+				vAxis: {
+					format:'##.###%',
+					textPosition: 'out'
+				},
+				legend: {position: 'bottom'},
+				animation: {duration:3000}
+			};
+
+			google.load("visualization", "1", {packages:["corechart"], 'language': 'en'});       google.setOnLoadCallback(initChart_ConstructHistory);
+			// $(document).ready(initChart);
+
+			function initChart_ConstructHistory() {
+				chart_ConstructHistory = new google.visualization.LineChart(document.getElementById('ConstructHistory'));
+				drawChart_ConstructHistory();
+			}
+
+			function drawChart_ConstructHistory() {
+				delete data_ConstructHistory;
+				data_ConstructHistory = new google.visualization.DataTable();
+				data_ConstructHistory.addColumn('datetime', 'Time');
+				data_ConstructHistory.addColumn('number', 'Abalesk');
+				data_ConstructHistory.addColumn('number', 'Bellerive');
+				data_ConstructHistory.addColumn('number', 'Canjara');
+				data_ConstructHistory.addColumn('number', 'Drakar');
+				data_ConstructHistory.addRows([
+					[new Date(1435188000000),0.982812,0.964832,1.0073,0.978389],[new Date(1435275000000),0.98258,0.965189,1.00724,0.978649],[new Date(1435361000000),0.98239,0.965558,1.00717,0.978925],[new Date(1435448000000),0.982231,0.965936,1.0071,0.979225],[new Date(1435534000000),0.982094,0.966336,1.00702,0.979552],[new Date(1435620000000),0.981969,0.966729,1.00694,0.979879],[new Date(1435707000000),0.98183,0.967097,1.00686,0.980208],[new Date(1435793000000),0.981671,0.967442,1.00679,0.980532],[new Date(1435880000000),0.981504,0.967775,1.00672,0.98086],[new Date(1435966000000),0.981357,0.968102,1.00665,0.981188],[new Date(1436052000000),0.981224,0.968433,1.00658,0.981525],[new Date(1436139000000),0.981091,0.96876,1.0065,0.981869],[new Date(1436225000000),0.980956,0.969046,1.00643,0.982199],[new Date(1436312000000),0.980806,0.969274,1.00637,0.98252],[new Date(1436398000000),0.980649,0.969469,1.00631,0.982836],[new Date(1436484000000),0.980492,0.96964,1.00625,0.983159],[new Date(1436571000000),0.980331,0.969781,1.00619,0.983476],[new Date(1436657000000),0.980163,0.969919,1.00614,0.983791],[new Date(1436744000000),0.979976,0.970062,1.00609,0.984112],[new Date(1436830000000),0.979783,0.970221,1.00603,0.984459],[new Date(1436916000000),0.979594,0.970404,1.00597,0.984829],[new Date(1437003000000),0.97941,0.970611,1.00591,0.985217],[new Date(1437089000000),0.979259,0.970848,1.00584,0.985642],[new Date(1437176000000),0.979123,0.971095,1.00577,0.986074],[new Date(1437262000000),0.97901,0.971359,1.00569,0.986507],[new Date(1437348000000),0.978916,0.971646,1.00561,0.98696],[new Date(1437435000000),0.97884,0.971947,1.00553,0.987417],[new Date(1437521000000),0.978776,0.972273,1.00544,0.987866],[new Date(1437608000000),0.978724,0.97262,1.00535,0.988305],[new Date(1437694000000),0.978699,0.972998,1.00526,0.988736]        ]);
+				chart_ConstructHistory.draw(data_ConstructHistory, options_ConstructHistory);
+			}
+		</script>
+	</div></div>
+
+	<div id="TextBottom">
+		<p><strong>Simunomics is a massive-multiplayer Business Simulation Game where you  create your own business and set your own strategy to conquer a vast, changing economy.</strong></p>
+		<ul>
+			<li>Choose one product or many.  </li>
+			<li>Build Farms, Factories, Stores, Research &amp; Development Centers, and/or Raw Materials sites.</li>
+			<li>Set prices for retail customers, or deal purely with other businesses.  </li>
+			<li>Create your own products and name your own brands, or be a reseller of someone else's.</li>
+			<li>Earn awards and try to be the most decorated company, or focus on the bottom line and go purely for size.</li>
+			<li>Follow your progress with graphs that track market share and price movements, and accounting statements that follow GAAP and IFRS standards..</li>
+			<li>Be part of an economy that grows and changes with you.</li>
+		</ul>
+		<p>Fun meets realism in a virtual world. Simunomics is the Ultimate Economy Game.</p>
+	</div>
+	<span style="color:#FF0">Problems?  Concerns?  Suggestions?  <a href="http://forums.simunomics.com">Check the Forums</a></span>
+	<br /><br />
+	<div class="BottomTerms">
+		<div class="third"><a href="javascript:void(window.open('SharedDisplay/IncludeRules.php', 'Game Rules', 'width=800,height=400,resizable=yes,scrollbars=yes'))">Game Rules</a></div>
+		<div class="third"><a href="javascript:void(window.open('SharedDisplay/IncludeToS.php', 'Terms of Service', 'width=800,height=400,resizable=yes,scrollbars=yes'))">Terms of Service</a></div>
+		<div class="third"><a href="javascript:void(window.open('SharedDisplay/IncludePrivacy.php', 'Privacy Policy', 'width=800,height=400,resizable=yes,scrollbars=yes'))">Privacy Policy</a></div>
+		<br style="clear:both" />
+	</div>
+</div>
+</body>
+
+</html>
